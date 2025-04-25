@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonDivide: Button
     private lateinit var textViewResult: TextView
     private lateinit var buttonClear: Button
+    //Initializing new added UI element
+    private lateinit var buttonPercentage: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         buttonSubtract = findViewById(R.id.buttonSubtract)
         buttonMultiply = findViewById(R.id.buttonMultiply)
         buttonDivide = findViewById(R.id.buttonDivide)
+        //Initializing new added UI element
+        buttonPercentage = findViewById(R.id.buttonPercentage)
         textViewResult = findViewById(R.id.textViewResult)
         buttonClear = findViewById(R.id.buttonClear)
 
@@ -53,6 +57,20 @@ class MainActivity : AppCompatActivity() {
             editTextNum1.text.clear()
             editTextNum2.text.clear()
             textViewResult.text = ""
+        }
+        //The newly added Percentage button functionality
+        buttonPercentage.setOnClickListener {
+            val num1 = editTextNum1.text.toString().toDoubleOrNull()
+            val num2 = editTextNum2.text.toString().toDoubleOrNull()
+
+            if (num1 == null || num2 == null) {
+                textViewResult.text = "Please enter valid numbers"
+                return@setOnClickListener
+            }
+
+            // Calculate percentage: num1% of num2
+            val result = num1 * num2 / 100
+            textViewResult.text = "Result: ${String.format("%.2f", result)}"
         }
     }
 
